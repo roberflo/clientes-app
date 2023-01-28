@@ -1,0 +1,24 @@
+@page {
+    size: 100% 100%; // set appropriately
+    margin: 19px;
+  }
+  @media print {
+    html, body {
+      width: 396px; // set appropriately
+      height: 510px; // set appropriately
+    }
+    /* ... the rest of the rules ... */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border:1;
+      /* border:none !important; */
+      
+    }
+    th, td {
+      text-align: left;
+      font-size: 9px;
+      border:1;
+      /* border:none !important;  */
+    }
+  }
