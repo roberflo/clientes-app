@@ -4,21 +4,87 @@
   }
   @media print {
     html, body {
-      width: 396px; // set appropriately
-      height: 510px; // set appropriately
+      width: 434.64572405px; // set appropriately
+      height: 585.82684546px; // set appropriately
     }
     /* ... the rest of the rules ... */
-    table {
+    /*table {
       width: 100%;
       border-collapse: collapse;
       border:1;
-      /* border:none !important; */
+      //border:none !important;
       
     }
     th, td {
       text-align: left;
       font-size: 9px;
       border:1;
-      /* border:none !important;  */
-    }
+      //border:none !important;
+    }*/
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border:1;
+    //border:none !important;
+    
+  }
+  th, td {
+    text-align: left;
+    font-size: 15px;
+    border:1;
+    //border:none !important;
+  }
+
+  .column-align-right-totales {
+    column-width: 20px !important;
+    text-align: right !important;
+  }
+
+  .row-height-encabezado {
+    height: 80px !important;
+  }
+
+  .row-height-detalle {
+    height: 28px !important;
+  }
+
+  .row-height-totales {
+    height: 21px !important;
+  }
+
+  .row-height-totales-iva-total {
+    text-align: right;
+    vertical-align: top !important;
+  }
+
+  .row-padding-left-nombreCliente {
+    padding-left: 14px;
+  }
+
+  .row-padding-left-direccion {
+    padding-left: 16px;
+  }
+
+  .row-padding-left-ventaACuentaDe {
+    padding-left: 74px;
+  }
+
+  .row-padding-left-dui {
+    padding-left: 50px;
+  }
+
+  .column-align-center-cantidad {
+    text-align: center;
+    column-width: 25px;
+  }
+
+  .column-align-left-descripcion {
+    text-align: left;
+    column-width: 160px;
+  }
+
+  .row-text-size-items {
+    font-size: 11px;
   }

@@ -54,79 +54,75 @@ const PrintInvoice = (props: any) => {
         <div id="print">
           <table border={1}>
             <tr>
-              <td colSpan={5} rowSpan={2}></td>
-              <td colSpan={1}>Factura</td>
+              <td colSpan={6} rowSpan={2}></td>
+              <td colSpan={2}>Factura</td>
             </tr>
             <tr>
-              <td colSpan={1}>No. {props.invoiceSelected.id}</td>
+              <td colSpan={2}>No. {props.invoiceSelected.id}</td>
+            </tr>
+            <tr className="row-height-encabezado">
             </tr>
             <tr>
-              <td colSpan={1}>Cliente</td>
-              <td colSpan={5}>{props.invoiceSelected.CustomerName}</td>
+              <td colSpan={1}></td>
+              <td className="row-padding-left-nombreCliente" colSpan={7}>{props.invoiceSelected.CustomerName}</td>
             </tr>
             <tr>
-              <td>Direccion</td>
-              <td colSpan={5}>{props.invoiceSelected.Address}</td>
+              <td></td>
+              <td className="row-padding-left-direccion" colSpan={7}>{props.invoiceSelected.Address}</td>
             </tr>
             <tr>
-              <td colSpan={2}>Venta a cuenta de </td>
-              <td colSpan={2}>{props.invoiceSelected.AccountOf}</td>
-              <td>DUI/NIT</td>
-              <td>
-                {props.invoiceSelected.DUI} / {props.invoiceSelected.NIT}
+              <td colSpan={1}></td>
+              <td className="row-padding-left-ventaACuentaDe" colSpan={3}>{props.invoiceSelected.AccountOf}</td>
+              <td className="row-padding-left-dui" colSpan={4}>
+                {props.invoiceSelected.DUI}
               </td>
             </tr>
-            <tr>
-              <th>Cantidad</th>
-              <th>DESCRIPCION</th>
-              <th>Precio Unitario</th>
-              <th>Ventas No Sujetas</th>
-              <th>Ventas Excentas</th>
-              <th>Ventas Afectas</th>
+            <tr className="row-height-detalle">
+              <th></th>
+              <th colSpan={3}></th>
+              <th className="column-align-right-totales"></th>
+              <th className="column-align-right-totales"></th>
+              <th className="column-align-right-totales"></th>
+              <th className="column-align-right-totales"></th>
             </tr>
 
             {props.invoiceSelected.InvoiceItems.map(function (item: any) {
               return (
                 <tr>
-                  <td>{item.Quantity}</td>
-                  <td>{item.Description}</td>
-                  <td>{item.Price}</td>
-                  <td>{item.NonSubjectsSales}</td>
-                  <td>{item.ExcentSales}</td>
-                  <td>{item.Quantity * item.Price}</td>
+                  <td className="column-align-center-cantidad row-text-size-items">{item.Quantity}</td>
+                  <td colSpan={3} className="column-align-left-descripcion row-text-size-items">{(item.Price < 1) ? '.' : item.Description }</td>
+                  <td className="row-text-size-items"> {(item.Price < 1) ? '' : `$${item.Price}` }</td>
+                  <td className="row-text-size-items"> {(item.NonSubjectsSales < 1) ? '' : `$${item.NonSubjectsSales}` }</td>
+                  <td className="row-text-size-items"> {(item.ExcentSales < 1) ? '' : `$${item.ExcentSales}` }</td>
+                  <td className="row-text-size-items"> {(item.Quantity < 1) ? '' : `$${item.Quantity * item.Price}` }</td>
                 </tr>
               );
             })}
 
             <tr>
-              <td colSpan={2} rowSpan={4}>
-                Son: {props.invoiceSelected.Description}
+              <td colSpan={4} rowSpan={4}>
+                {props.invoiceSelected.Description}
               </td>
-              <td>Sumas</td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td colSpan={3}></td>
+              <td className="column-align-right-totales row-text-size-items row-height-totales">{props.invoiceSelected.SubTotal}</td>
             </tr>
             <tr>
-              <td colSpan={3}>Ventas Excentas</td>
-              <td>{props.invoiceSelected.ExcentSales}</td>
+              <td colSpan={3}></td>
+              <td className="column-align-right-totales row-text-size-items row-height-totales">{props.invoiceSelected.ExcentSales}</td>
             </tr>
             <tr>
-              <td colSpan={3}>Ventas no Sujetas</td>
-              <td>{props.invoiceSelected.NonSubjectsSales}</td>
+              <td colSpan={3}></td>
+              <td className="column-align-right-totales row-text-size-items row-height-totales">{props.invoiceSelected.NonSubjectsSales}</td>
             </tr>
             <tr>
-              <td colSpan={3}>Subtotal</td>
-              <td>{props.invoiceSelected.SubTotal}</td>
+              <td colSpan={3}></td>
+              <td className="column-align-right-totales row-text-size-items row-height-totales">{props.invoiceSelected.SubTotal}</td>
             </tr>
             <tr>
-              <td colSpan={2} rowSpan={4}></td>
-              <td colSpan={3}> Iva retenido</td>
-              <td>{props.invoiceSelected.IVA}</td>
+              <td colSpan={8} className="row-height-totales-iva-total row-text-size-items">{props.invoiceSelected.IVA}</td>
             </tr>
             <tr>
-              <td colSpan={3}>Venta Total</td>
-              <td>{props.invoiceSelected.Total}</td>
+              <td colSpan={8} className="row-height-totales-iva-total row-text-size-items">{props.invoiceSelected.Total}</td>
             </tr>
           </table>
         </div>
