@@ -54,16 +54,18 @@ const PrintInvoice = (props: any) => {
         <div id="print">
           <table border={1}>
             <tr>
-              <td colSpan={6} rowSpan={2}></td>
-              <td colSpan={2}>Factura</td>
+              <td colSpan={4} rowSpan={2} className="row-column-width-encabezado"></td>
+              <td colSpan={4}>Factura</td>
             </tr>
             <tr>
-              <td colSpan={2}>No. {props.invoiceSelected.id}</td>
+              <td colSpan={4}>No. {props.invoiceSelected.id}</td>
             </tr>
-            <tr className="row-height-encabezado">
+            <tr className="row-height-encabezado column-align-right-fecha">
+              <td colSpan={4}></td>
+              <td colSpan={4}>{props.invoiceSelected.CreatedAt}</td>
             </tr>
             <tr>
-              <td colSpan={1}></td>
+              <td></td>
               <td className="row-padding-left-nombreCliente" colSpan={7}>{props.invoiceSelected.CustomerName}</td>
             </tr>
             <tr>
@@ -71,58 +73,69 @@ const PrintInvoice = (props: any) => {
               <td className="row-padding-left-direccion" colSpan={7}>{props.invoiceSelected.Address}</td>
             </tr>
             <tr>
-              <td colSpan={1}></td>
+              <td></td>
               <td className="row-padding-left-ventaACuentaDe" colSpan={3}>{props.invoiceSelected.AccountOf}</td>
-              <td className="row-padding-left-dui" colSpan={4}>
-                {props.invoiceSelected.DUI}
-              </td>
+              <td className="row-padding-left-dui" colSpan={4}>{props.invoiceSelected.DUI}</td>
             </tr>
             <tr className="row-height-detalle">
-              <th></th>
-              <th colSpan={3}></th>
-              <th className="column-align-right-totales"></th>
-              <th className="column-align-right-totales"></th>
-              <th className="column-align-right-totales"></th>
-              <th className="column-align-right-totales"></th>
+              <th colSpan={8}></th>
             </tr>
 
             {props.invoiceSelected.InvoiceItems.map(function (item: any) {
               return (
                 <tr>
-                  <td className="column-align-center-cantidad row-text-size-items">{item.Quantity}</td>
-                  <td colSpan={3} className="column-align-left-descripcion row-text-size-items">{(item.Price < 1) ? '.' : item.Description }</td>
-                  <td className="row-text-size-items"> {(item.Price < 1) ? '' : `$${item.Price}` }</td>
-                  <td className="row-text-size-items"> {(item.NonSubjectsSales < 1) ? '' : `$${item.NonSubjectsSales}` }</td>
-                  <td className="row-text-size-items"> {(item.ExcentSales < 1) ? '' : `$${item.ExcentSales}` }</td>
-                  <td className="row-text-size-items"> {(item.Quantity < 1) ? '' : `$${item.Quantity * item.Price}` }</td>
+                  <td className="row-text-size-items column-align-center-cantidad row-padding-left-cantidad">{item.Quantity}</td>
+                  <td colSpan={3} className="row-text-size-items row-padding-left-descripcion">{(item.Price < 1) ? '.' : item.Description }</td>
+                  <td className="row-text-size-items column-align-right-totales row-column-width-detalle">{(item.Price < 1) ? '' : `$${item.Price}` }</td>
+                  <td className="row-text-size-items column-align-right-totales row-column-width-detalle">{(item.NonSubjectsSales < 1) ? '' : `$${item.NonSubjectsSales}` }</td>
+                  <td className="row-text-size-items column-align-right-totales row-column-width-detalle">{(item.ExcentSales < 1) ? '' : `$${item.ExcentSales}` }</td>
+                  <td className="row-text-size-items column-align-right-totales row-column-width-detalle">{(item.Quantity < 1) ? '' : `$${item.Quantity * item.Price}` }</td>
                 </tr>
               );
             })}
 
+            <tr className="row-height-totales">
+              <th colSpan={8}></th>
+            </tr>
+
             <tr>
-              <td colSpan={4} rowSpan={4}>
-                {props.invoiceSelected.Description}
-              </td>
+              <td></td>
+              <td colSpan={3} rowSpan={4}></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td className="row-text-size-totales column-align-right-totales">{`$${props.invoiceSelected.SubTotal}`}</td>
+            </tr>
+            <tr>
+              <td></td>
               <td colSpan={3}></td>
-              <td className="column-align-right-totales row-text-size-items row-height-totales">{props.invoiceSelected.SubTotal}</td>
+              <td className="row-text-size-totales column-align-right-totales">{`$${props.invoiceSelected.ExcentSales}`}</td>
             </tr>
             <tr>
+              <td></td>
               <td colSpan={3}></td>
-              <td className="column-align-right-totales row-text-size-items row-height-totales">{props.invoiceSelected.ExcentSales}</td>
+              <td className="row-text-size-totales column-align-right-totales">{`$${props.invoiceSelected.NonSubjectsSales}`}</td>
             </tr>
             <tr>
+              <td></td>
               <td colSpan={3}></td>
-              <td className="column-align-right-totales row-text-size-items row-height-totales">{props.invoiceSelected.NonSubjectsSales}</td>
+              <td className="row-text-size-totales column-align-right-totales">{`$${props.invoiceSelected.SubTotal}`}</td>
             </tr>
             <tr>
+              <td></td>
               <td colSpan={3}></td>
-              <td className="column-align-right-totales row-text-size-items row-height-totales">{props.invoiceSelected.SubTotal}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td className="row-text-size-totales column-align-right-totales">{`$${props.invoiceSelected.IVA}`}</td>
             </tr>
             <tr>
-              <td colSpan={8} className="row-height-totales-iva-total row-text-size-items">{props.invoiceSelected.IVA}</td>
-            </tr>
-            <tr>
-              <td colSpan={8} className="row-height-totales-iva-total row-text-size-items">{props.invoiceSelected.Total}</td>
+              <td></td>
+              <td colSpan={3}></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td className="row-text-size-totales column-align-right-totales">{`$${props.invoiceSelected.Total}`}</td>
             </tr>
           </table>
         </div>

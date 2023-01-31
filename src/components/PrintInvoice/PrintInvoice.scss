@@ -1,29 +1,14 @@
 @page {
-    size: 100% 100%; // set appropriately
-    margin: 19px;
+  size: 100% 100%; // set appropriately
+  margin: 19px;
+}
+@media print {
+  html, body {
+    width: 434.64572405px; // set appropriately
+    height: 585.82684546px; // set appropriately
   }
-  @media print {
-    html, body {
-      width: 434.64572405px; // set appropriately
-      height: 585.82684546px; // set appropriately
-    }
-    /* ... the rest of the rules ... */
-    /*table {
-      width: 100%;
-      border-collapse: collapse;
-      border:1;
-      //border:none !important;
-      
-    }
-    th, td {
-      text-align: left;
-      font-size: 9px;
-      border:1;
-      //border:none !important;
-    }*/
-  }
-
-  table {
+  /* ... the rest of the rules ... */
+  /*table {
     width: 100%;
     border-collapse: collapse;
     border:1;
@@ -32,59 +17,87 @@
   }
   th, td {
     text-align: left;
-    font-size: 15px;
+    font-size: 9px;
     border:1;
     //border:none !important;
-  }
+  }*/
+}
 
-  .column-align-right-totales {
-    column-width: 20px !important;
-    text-align: right !important;
-  }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border:1;
+  //border:none !important;
+  
+}
+th, td {
+  text-align: left;
+  font-size: 15px;
+  border:1;
+  //border:none !important;
+}
 
-  .row-height-encabezado {
-    height: 80px !important;
-  }
+//Clases funcionales
+.row-column-width-detalle {
+  column-width: 30px !important;
+}
 
-  .row-height-detalle {
-    height: 28px !important;
-  }
+.row-column-width-encabezado {
+  column-width: 210px !important;
+}
 
-  .row-height-totales {
-    height: 21px !important;
-  }
+.row-height-encabezado {
+  height: 80px !important;
+}
 
-  .row-height-totales-iva-total {
-    text-align: right;
-    vertical-align: top !important;
-  }
+.row-height-detalle {
+  height: 28px !important;
+}
 
-  .row-padding-left-nombreCliente {
-    padding-left: 14px;
-  }
+.row-height-totales {
+  height: 5px !important;
+}
 
-  .row-padding-left-direccion {
-    padding-left: 16px;
-  }
+.column-align-center-cantidad {
+  text-align: right !important;
+}
 
-  .row-padding-left-ventaACuentaDe {
-    padding-left: 74px;
-  }
+.column-align-right-totales {
+  text-align: right !important;
+}
 
-  .row-padding-left-dui {
-    padding-left: 50px;
-  }
+.column-align-right-fecha {
+  vertical-align: bottom !important;
+}
 
-  .column-align-center-cantidad {
-    text-align: center;
-    column-width: 25px;
-  }
+.row-text-size-items {
+  font-size: 9px;
+}
 
-  .column-align-left-descripcion {
-    text-align: left;
-    column-width: 160px;
-  }
+.row-text-size-totales {
+  font-size: 12px;
+}
 
-  .row-text-size-items {
-    font-size: 11px;
-  }
+.row-padding-left-descripcion {
+  padding-left: 12px;
+}
+
+.row-padding-left-dui {
+  padding-left: 65px;
+}
+
+.row-padding-left-ventaACuentaDe {
+  padding-left: 90px;
+}
+
+.row-padding-left-nombreCliente {
+  padding-left: 30px;
+}
+
+.row-padding-left-direccion {
+  padding-left: 35px;
+}
+
+.row-padding-left-cantidad {
+  padding-left: 18px;
+}
