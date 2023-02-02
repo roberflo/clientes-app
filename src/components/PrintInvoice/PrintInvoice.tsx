@@ -5,6 +5,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import "./PrintInvoice.scss";
+import { parseJSON, parse } from "date-fns";
 
 function printOut(divId: string) {
   if (document != null) {
@@ -14,6 +15,22 @@ function printOut(divId: string) {
     window.print();
     document.body.innerHTML = originalContent;
   }
+}
+
+function Day(dateString: string) {
+  let formattedDate = parseJSON(dateString);
+  let day = formattedDate.getDay();
+  return day;
+}
+
+function Month(dateString: string) {
+  let formattedDate = parseJSON(dateString);
+  return (formattedDate.getMonth() + 1).toString().padStart(2, "0");
+}
+
+function Year(dateString: string) {
+  let formattedDate = parseJSON(dateString);
+  return formattedDate.getFullYear();
 }
 
 /*
@@ -62,20 +79,30 @@ const PrintInvoice = (props: any) => {
             </tr>
             <tr className="row-height-encabezado column-align-right-fecha">
               <td colSpan={4}></td>
-              <td colSpan={4}>{props.invoiceSelected.CreatedAt}</td>
+              <td colSpan={4}>
+                {Day(props.invoiceSelected.CreatedAt)} / {Month(props.invoiceSelected.CreatedAt)} / {Year(props.invoiceSelected.CreatedAt)}
+              </td>
             </tr>
             <tr>
               <td></td>
-              <td className="row-padding-left-nombreCliente" colSpan={7}>{props.invoiceSelected.CustomerName}</td>
+              <td className="row-padding-left-nombreCliente" colSpan={7}>
+                {props.invoiceSelected.CustomerName}
+              </td>
             </tr>
             <tr>
               <td></td>
-              <td className="row-padding-left-direccion" colSpan={7}>{props.invoiceSelected.Address}</td>
+              <td className="row-padding-left-direccion" colSpan={7}>
+                {props.invoiceSelected.Address}
+              </td>
             </tr>
             <tr>
               <td></td>
-              <td className="row-padding-left-ventaACuentaDe" colSpan={3}>{props.invoiceSelected.AccountOf}</td>
-              <td className="row-padding-left-dui" colSpan={4}>{props.invoiceSelected.DUI}</td>
+              <td className="row-padding-left-ventaACuentaDe" colSpan={3}>
+                {props.invoiceSelected.AccountOf}
+              </td>
+              <td className="row-padding-left-dui" colSpan={4}>
+                {props.invoiceSelected.DUI}
+              </td>
             </tr>
             <tr className="row-height-detalle">
               <th colSpan={8}></th>
@@ -85,11 +112,21 @@ const PrintInvoice = (props: any) => {
               return (
                 <tr>
                   <td className="row-text-size-items column-align-center-cantidad row-padding-left-cantidad">{item.Quantity}</td>
-                  <td colSpan={3} className="row-text-size-items row-padding-left-descripcion">{(item.Price < 1) ? '.' : item.Description }</td>
-                  <td className="row-text-size-items column-align-right-totales row-column-width-detalle">{(item.Price < 1) ? '' : `$${item.Price}` }</td>
-                  <td className="row-text-size-items column-align-right-totales row-column-width-detalle">{(item.NonSubjectsSales < 1) ? '' : `$${item.NonSubjectsSales}` }</td>
-                  <td className="row-text-size-items column-align-right-totales row-column-width-detalle">{(item.ExcentSales < 1) ? '' : `$${item.ExcentSales}` }</td>
-                  <td className="row-text-size-items column-align-right-totales row-column-width-detalle">{(item.Quantity < 1) ? '' : `$${item.Quantity * item.Price}` }</td>
+                  <td colSpan={3} className="row-text-size-items row-padding-left-descripcion">
+                    {item.Price < 1 ? "." : item.Description}
+                  </td>
+                  <td className="row-text-size-items column-align-right-totales row-column-width-detalle">
+                    {item.Price < 1 ? "" : `$${item.Price}`}
+                  </td>
+                  <td className="row-text-size-items column-align-right-totales row-column-width-detalle">
+                    {item.NonSubjectsSales < 1 ? "" : `$${item.NonSubjectsSales}`}
+                  </td>
+                  <td className="row-text-size-items column-align-right-totales row-column-width-detalle">
+                    {item.ExcentSales < 1 ? "" : `$${item.ExcentSales}`}
+                  </td>
+                  <td className="row-text-size-items column-align-right-totales row-column-width-detalle">
+                    {item.Quantity < 1 ? "" : `$${item.Quantity * item.Price}`}
+                  </td>
                 </tr>
               );
             })}
