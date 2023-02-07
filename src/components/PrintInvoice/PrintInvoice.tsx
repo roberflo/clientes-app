@@ -67,12 +67,15 @@ function numberToWords(number: string | number) {
     var integerPart = parseInt(number, 10);
     var decimalPart = number.toString().split(".")[1];
     var decimalPartInWords = "";
+    var numeroDecimal;
     for (var i = 0; i < decimalPart.length; i += 2) {
       var decimalNumber = parseInt(decimalPart.substr(i, 2));
       if (decimalNumber < 20) decimalPartInWords += unidades[decimalNumber];
       else decimalPartInWords += decenas[Math.floor(decimalNumber / 10)] + (decimalNumber % 10 ? " y " + unidades[decimalNumber % 10] : "");
+      numeroDecimal = decimalNumber;
     }
-    return numberToWords(integerPart) + " punto " + decimalPartInWords;
+    //return numberToWords(integerPart) + " punto " + decimalPartInWords;
+    return numberToWords(integerPart) + " " + numeroDecimal + "/100 ";
   }
 }
 
@@ -132,15 +135,14 @@ const PrintInvoice = (props: any) => {
         <div id="print">
           <table border={1}>
             <tr>
-              <td colSpan={4} rowSpan={2} className="row-column-width-encabezado"></td>
-              <td colSpan={4}>Factura</td>
+              <td colSpan={8} className="row-height-principales"></td>
             </tr>
             <tr>
-              <td colSpan={4}>No. {props.invoiceSelected.id}</td>
+              <td colSpan={8} className="row-height-principales"></td>
             </tr>
             <tr className="row-height-encabezado column-align-right-fecha">
-              <td colSpan={4}></td>
-              <td className="row-text-size-fecha column-align-right-dia">{Day(props.invoiceSelected.CreatedAt)}</td>
+              <td colSpan={4} className="row-column-width-encabezado"></td>
+              <td className="row-text-size-fecha column-align-center-dia">{Day(props.invoiceSelected.CreatedAt)}</td>
               <td></td>
               <td className="row-text-size-fecha row-padding-left-mes">{Month(props.invoiceSelected.CreatedAt)}</td>
               <td className="row-text-size-fecha row-padding-left-anio">{Year(props.invoiceSelected.CreatedAt)}</td>
@@ -150,9 +152,10 @@ const PrintInvoice = (props: any) => {
             </tr>
             <tr>
               <td></td>
-              <td className="row-padding-left-nombreCliente" colSpan={7}>
+              <td className="row-padding-left-nombreCliente" colSpan={6}>
                 {props.invoiceSelected.CustomerName}
               </td>
+              <td>No. {props.invoiceSelected.id}</td>
             </tr>
             <tr>
               <td></td>
@@ -183,7 +186,7 @@ const PrintInvoice = (props: any) => {
                   <td className="row-text-size-items column-align-right-totales row-column-width-detalle">
                     {item.Price < 1 ? "" : `$${item.Price}`}
                   </td>
-                  <td className="row-text-size-items column-align-right-totales row-column-width-detalle">
+                  <td className="row-text-size-items column-align-right-totales row-column-width-detalle-2">
                     {item.NonSubjectsSales < 1 ? "" : `$${item.NonSubjectsSales}`}
                   </td>
                   <td className="row-text-size-items column-align-right-totales">
@@ -196,13 +199,9 @@ const PrintInvoice = (props: any) => {
               );
             })}
 
-            <tr className="row-height-totales">
-              <th colSpan={8}>{numberToWords(props.invoiceSelected.Total)}</th>
-            </tr>
-
             <tr>
               <td></td>
-              <td colSpan={3} rowSpan={4}></td>
+              <td colSpan={3} rowSpan={4} className="column-align-right-totalEnLetras row-text-size-totalEnLetras">{numberToWords(props.invoiceSelected.Total)}</td>
               <td></td>
               <td></td>
               <td></td>

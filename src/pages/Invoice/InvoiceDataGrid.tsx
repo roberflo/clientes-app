@@ -103,7 +103,7 @@ const InvoiceDataGrid = () => {
           ExcentSales: null,
         };
 
-        for (let index = 0; index < 22 - data.data[0].InvoiceItems.length; index++) {
+        for (let index = 0; index < 24 - data.data[0].InvoiceItems.length; index++) {
           data.data[0].InvoiceItems.push(itemEmpty);
         }
 

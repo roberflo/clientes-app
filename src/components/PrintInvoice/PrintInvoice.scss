@@ -26,15 +26,15 @@
 table {
   width: 100%;
   border-collapse: collapse;
-  border:1;
-  //border:none !important;
+  //border:1;
+  border:none !important;
   
 }
 th, td {
   text-align: left;
   font-size: 15px;
-  border:1;
-  //border:none !important;
+  //border:1;
+  border:none !important;
 }
 
 //Clases funcionales
@@ -42,8 +42,12 @@ th, td {
   column-width: 30px !important;
 }
 
+.row-column-width-detalle-2 {
+  column-width: 20px !important;
+}
+
 .row-column-width-encabezado {
-  column-width: 210px !important;
+  column-width: 218px !important;
 }
 
 .row-height-encabezado {
@@ -51,11 +55,15 @@ th, td {
 }
 
 .row-height-detalle {
-  height: 29px !important;
+  height: 33px !important;
 }
 
 .row-height-totales {
   height: 5px !important;
+}
+
+.row-height-principales {
+  height: 28px !important;
 }
 
 .row-height-fecha {
@@ -70,12 +78,16 @@ th, td {
   text-align: right !important;
 }
 
-.column-align-right-dia {
-  text-align: right !important;
+.column-align-center-dia {
+  text-align: center !important;
 }
 
 .column-align-right-fecha {
   vertical-align: bottom !important;
+}
+
+.column-align-right-totalEnLetras {
+  vertical-align: top !important;
 }
 
 .row-text-size-items {
@@ -87,6 +99,10 @@ th, td {
 }
 
 .row-text-size-fecha {
+  font-size: 12px;
+}
+
+.row-text-size-totalEnLetras {
   font-size: 12px;
 }
 
@@ -119,5 +135,5 @@ th, td {
 }
 
 .row-padding-left-cantidad {
-  padding-left: 18px;
+  padding-left: 20px;
 }
