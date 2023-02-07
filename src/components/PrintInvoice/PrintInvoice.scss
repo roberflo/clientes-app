@@ -47,14 +47,18 @@ th, td {
 }
 
 .row-height-encabezado {
-  height: 80px !important;
+  height: 75px !important;
 }
 
 .row-height-detalle {
-  height: 28px !important;
+  height: 29px !important;
 }
 
 .row-height-totales {
+  height: 5px !important;
+}
+
+.row-height-fecha {
   height: 5px !important;
 }
 
@@ -63,6 +67,10 @@ th, td {
 }
 
 .column-align-right-totales {
+  text-align: right !important;
+}
+
+.column-align-right-dia {
   text-align: right !important;
 }
 
@@ -78,12 +86,24 @@ th, td {
   font-size: 12px;
 }
 
+.row-text-size-fecha {
+  font-size: 12px;
+}
+
 .row-padding-left-descripcion {
   padding-left: 12px;
 }
 
 .row-padding-left-dui {
   padding-left: 65px;
+}
+
+.row-padding-left-anio {
+  padding-left: 20px;
+}
+
+.row-padding-left-mes {
+  padding-left: 10px;
 }
 
 .row-padding-left-ventaACuentaDe {

@@ -33,6 +33,8 @@ function Year(dateString: string) {
   return formattedDate.getFullYear();
 }
 
+
+
 /*
 {
   id: 0,
@@ -79,9 +81,13 @@ const PrintInvoice = (props: any) => {
             </tr>
             <tr className="row-height-encabezado column-align-right-fecha">
               <td colSpan={4}></td>
-              <td colSpan={4}>
-                {Day(props.invoiceSelected.CreatedAt)} / {Month(props.invoiceSelected.CreatedAt)} / {Year(props.invoiceSelected.CreatedAt)}
-              </td>
+              <td className="row-text-size-fecha column-align-right-dia">{Day(props.invoiceSelected.CreatedAt)}</td>
+              <td></td>
+              <td className="row-text-size-fecha row-padding-left-mes">{Month(props.invoiceSelected.CreatedAt)}</td>
+              <td className="row-text-size-fecha row-padding-left-anio">{Year(props.invoiceSelected.CreatedAt)}</td>
+            </tr>
+            <tr className="row-height-fecha">
+              <th colSpan={8}></th>
             </tr>
             <tr>
               <td></td>
@@ -112,7 +118,7 @@ const PrintInvoice = (props: any) => {
               return (
                 <tr>
                   <td className="row-text-size-items column-align-center-cantidad row-padding-left-cantidad">{item.Quantity}</td>
-                  <td colSpan={3} className="row-text-size-items row-padding-left-descripcion">
+                  <td colSpan={3} className="row-text-size-items">
                     {item.Price < 1 ? "." : item.Description}
                   </td>
                   <td className="row-text-size-items column-align-right-totales row-column-width-detalle">
@@ -121,10 +127,10 @@ const PrintInvoice = (props: any) => {
                   <td className="row-text-size-items column-align-right-totales row-column-width-detalle">
                     {item.NonSubjectsSales < 1 ? "" : `$${item.NonSubjectsSales}`}
                   </td>
-                  <td className="row-text-size-items column-align-right-totales row-column-width-detalle">
+                  <td className="row-text-size-items column-align-right-totales">
                     {item.ExcentSales < 1 ? "" : `$${item.ExcentSales}`}
                   </td>
-                  <td className="row-text-size-items column-align-right-totales row-column-width-detalle">
+                  <td className="row-text-size-items column-align-right-totales">
                     {item.Quantity < 1 ? "" : `$${item.Quantity * item.Price}`}
                   </td>
                 </tr>
