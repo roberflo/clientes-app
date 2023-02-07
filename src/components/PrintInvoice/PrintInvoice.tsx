@@ -193,7 +193,7 @@ const PrintInvoice = (props: any) => {
                     {item.ExcentSales < 1 ? "" : `$${item.ExcentSales}`}
                   </td>
                   <td className="row-text-size-items column-align-right-totales">
-                    {item.Quantity < 1 ? "" : `$${item.Quantity * item.Price}`}
+                    {item.Quantity < 1 ? "" : `$${(item.Quantity * item.Price).toFixed(2)}`}
                   </td>
                 </tr>
               );
