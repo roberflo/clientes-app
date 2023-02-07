@@ -17,6 +17,65 @@ function printOut(divId: string) {
   }
 }
 
+function numberToWords(number: string | number) {
+  // Arreglo de unidades
+  var unidades = [
+    "",
+    "un",
+    "dos",
+    "tres",
+    "cuatro",
+    "cinco",
+    "seis",
+    "siete",
+    "ocho",
+    "nueve",
+    "diez",
+    "once",
+    "doce",
+    "trece",
+    "catorce",
+    "quince",
+    "dieciséis",
+    "diecisiete",
+    "dieciocho",
+    "diecinueve",
+  ];
+  // Arreglo de decenas hasta 90
+  var decenas = ["", "", "veinte", "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa"];
+  // Arreglo de cientos hasta 900
+  var cientos = [
+    "",
+    "ciento",
+    "doscientos",
+    "trescientos",
+    "cuatrocientos",
+    "quinientos",
+    "seiscientos",
+    "setecientos",
+    "ochocientos",
+    "novecientos",
+  ];
+
+  if (number === parseInt(number, 10)) {
+    if (number < 20) return unidades[number];
+    if (number < 100) return decenas[Math.floor(number / 10)] + (number % 10 ? " y " + unidades[number % 10] : "");
+    if (number < 1000) return cientos[Math.floor(number / 100)] + " " + numberToWords(number % 100);
+    if (number < 100000) return numberToWords(Math.floor(number / 1000)) + " mil " + numberToWords(number % 1000);
+    return "Número demasiado grande para ser convertido.";
+  } else {
+    var integerPart = parseInt(number, 10);
+    var decimalPart = number.toString().split(".")[1];
+    var decimalPartInWords = "";
+    for (var i = 0; i < decimalPart.length; i += 2) {
+      var decimalNumber = parseInt(decimalPart.substr(i, 2));
+      if (decimalNumber < 20) decimalPartInWords += unidades[decimalNumber];
+      else decimalPartInWords += decenas[Math.floor(decimalNumber / 10)] + (decimalNumber % 10 ? " y " + unidades[decimalNumber % 10] : "");
+    }
+    return numberToWords(integerPart) + " punto " + decimalPartInWords;
+  }
+}
+
 function Day(dateString: string) {
   let formattedDate = parseJSON(dateString);
   let day = formattedDate.getDay();
@@ -138,7 +197,7 @@ const PrintInvoice = (props: any) => {
             })}
 
             <tr className="row-height-totales">
-              <th colSpan={8}></th>
+              <th colSpan={8}>{numberToWords(props.invoiceSelected.Total)}</th>
             </tr>
 
             <tr>
