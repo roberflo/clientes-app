@@ -40,9 +40,9 @@ type Customer = {
 interface IInvoiceItem {
   [key: string]: boolean | number | string;
   id: number;
-  description: string;
-  quantity: number;
-  price: number;
+  Description: string;
+  Quantity: number;
+  Price: number;
   NonSubjectsSales: number;
   ExcentSales: number;
   SubTotal: number;
@@ -53,21 +53,21 @@ interface IInvoiceItem {
 class InvoiceItem implements IInvoiceItem {
   constructor(id: number, description: string, quantity: number, price: number, NonSubjectsSales: number, ExcentSales: number) {
     this.id = id;
-    this.description = description;
-    this.quantity = quantity;
-    this.price = price;
+    this.Description = description;
+    this.Quantity = quantity;
+    this.Price = price;
     this.NonSubjectsSales = NonSubjectsSales;
     this.ExcentSales = ExcentSales;
   }
   [key: string]: string | number | boolean;
   id: number;
-  description: string;
-  quantity: number;
-  price: number;
+  Description: string;
+  Quantity: number;
+  Price: number;
   NonSubjectsSales: number;
   ExcentSales: number;
   get SubTotal(): number {
-    return this.price * this.quantity;
+    return this.Price * this.Quantity;
   }
   get IVA(): number {
     return this.SubTotal * 0.13;
@@ -354,8 +354,8 @@ const CreateInvoice = () => {
                     <TextField
                       onChange={(event) => handleChangeInventoryItem(index, event)}
                       label="Cantidad"
-                      name="quantity"
-                      id="quantity"
+                      name="Quantity"
+                      id="Quantity"
                       size="small"
                       variant="outlined"
                       type="number"
@@ -369,8 +369,8 @@ const CreateInvoice = () => {
                     <TextField
                       onChange={(event) => handleChangeInventoryItem(index, event)}
                       label="Precio"
-                      name="price"
-                      id="price"
+                      name="Price"
+                      id="Price"
                       size="small"
                       variant="outlined"
                       type="number"
