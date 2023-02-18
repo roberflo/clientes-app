@@ -17,7 +17,7 @@ function printOut(divId: string) {
   }
 }
 
-function numberToWords(number: string | number) {
+function numberToWords(number: any): string {
   // Arreglo de unidades
   var unidades = [
     "",
@@ -57,7 +57,7 @@ function numberToWords(number: string | number) {
     "novecientos",
   ];
 
-  if (number === parseInt(number, 10)) {
+  if (number === parseInt(number.toString(), 10)) {
     if (number < 20) return unidades[number];
     if (number < 100) return decenas[Math.floor(number / 10)] + (number % 10 ? " y " + unidades[number % 10] : "");
     if (number < 1000) return cientos[Math.floor(number / 100)] + " " + numberToWords(number % 100);
@@ -74,7 +74,7 @@ function numberToWords(number: string | number) {
       else decimalPartInWords += decenas[Math.floor(decimalNumber / 10)] + (decimalNumber % 10 ? " y " + unidades[decimalNumber % 10] : "");
       numeroDecimal = decimalNumber;
     }
-    //return numberToWords(integerPart) + " punto " + decimalPartInWords;
+
     return numberToWords(integerPart) + " " + numeroDecimal + "/100 ";
   }
 }
@@ -94,8 +94,6 @@ function Year(dateString: string) {
   let formattedDate = parseJSON(dateString);
   return formattedDate.getFullYear();
 }
-
-
 
 /*
 {
@@ -189,9 +187,7 @@ const PrintInvoice = (props: any) => {
                   <td className="row-text-size-items column-align-right-totales row-column-width-detalle-2">
                     {item.NonSubjectsSales < 1 ? "" : `$${item.NonSubjectsSales}`}
                   </td>
-                  <td className="row-text-size-items column-align-right-totales">
-                    {item.ExcentSales < 1 ? "" : `$${item.ExcentSales}`}
-                  </td>
+                  <td className="row-text-size-items column-align-right-totales">{item.ExcentSales < 1 ? "" : `$${item.ExcentSales}`}</td>
                   <td className="row-text-size-items column-align-right-totales">
                     {item.Quantity < 1 ? "" : `$${(item.Quantity * item.Price).toFixed(2)}`}
                   </td>
@@ -201,7 +197,9 @@ const PrintInvoice = (props: any) => {
 
             <tr>
               <td></td>
-              <td colSpan={3} rowSpan={4} className="column-align-right-totalEnLetras row-text-size-totalEnLetras">{numberToWords(props.invoiceSelected.Total)}</td>
+              <td colSpan={3} rowSpan={4} className="column-align-right-totalEnLetras row-text-size-totalEnLetras">
+                {numberToWords(props.invoiceSelected.Total)}
+              </td>
               <td></td>
               <td></td>
               <td></td>
