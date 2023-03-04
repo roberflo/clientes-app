@@ -1,0 +1,139 @@
+@page {
+    size: 100% 100%; // set appropriately
+    margin: 19px;
+  }
+  @media print {
+    html, body {
+      width: 434.64572405px; // set appropriately
+      height: 585.82684546px; // set appropriately
+    }
+    /* ... the rest of the rules ... */
+    /*table {
+      width: 100%;
+      border-collapse: collapse;
+      border:1;
+      //border:none !important;
+      
+    }
+    th, td {
+      text-align: left;
+      font-size: 9px;
+      border:1;
+      //border:none !important;
+    }*/
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    //border:1;
+    border:none !important;
+    
+  }
+  th, td {
+    text-align: left;
+    font-size: 15px;
+    //border: 1;
+    border:none !important;
+  }
+  
+  //Clases funcionales
+  .row-column-width-detalle {
+    column-width: 30px !important;
+  }
+  
+  .row-column-width-detalle-2 {
+    column-width: 20px !important;
+  }
+  
+  .row-column-width-encabezado {
+    column-width: 218px !important;
+  }
+  
+  .row-height-encabezado {
+    height: 75px !important;
+  }
+  
+  .row-height-detalle {
+    height: 33px !important;
+  }
+  
+  .row-height-totales {
+    height: 5px !important;
+  }
+  
+  .row-height-principales {
+    height: 28px !important;
+  }
+  
+  .row-height-fecha {
+    height: 5px !important;
+  }
+  
+  .column-align-center-cantidad {
+    text-align: right !important;
+  }
+  
+  .column-align-right-totales {
+    text-align: right !important;
+  }
+  
+  .column-align-center-dia {
+    text-align: center !important;
+  }
+  
+  .column-align-right-fecha {
+    vertical-align: bottom !important;
+  }
+  
+  .column-align-right-totalEnLetras {
+    vertical-align: top !important;
+  }
+  
+  .row-text-size-items {
+    font-size: 9px;
+  }
+  
+  .row-text-size-totales {
+    font-size: 12px;
+  }
+  
+  .row-text-size-fecha {
+    font-size: 12px;
+  }
+  
+  .row-text-size-totalEnLetras {
+    font-size: 12px;
+  }
+  
+  .row-padding-left-descripcion {
+    padding-left: 12px;
+  }
+  
+  .row-padding-left-dui {
+    padding-left: 65px;
+  }
+  
+  .row-padding-left-anio {
+    padding-left: 20px;
+  }
+  
+  .row-padding-left-mes {
+    padding-left: 10px;
+  }
+  
+  .row-padding-left-ventaACuentaDe {
+    padding-left: 90px;
+  }
+  
+  .row-padding-left-nombreCliente {
+    padding-left: 30px;
+  }
+  
+  .row-padding-left-direccion {
+    padding-left: 35px;
+  }
+  
+  .row-padding-left-cantidad {
+    padding-left: 20px;
+  }
