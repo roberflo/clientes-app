@@ -51,9 +51,9 @@ interface IInvoiceItem {
 }
 
 class InvoiceItem implements IInvoiceItem {
-  constructor(id: number, description: string, quantity: number, price: number, NonSubjectsSales: number, ExcentSales: number) {
+  constructor(id: number, Description: string, quantity: number, price: number, NonSubjectsSales: number, ExcentSales: number) {
     this.id = id;
-    this.Description = description;
+    this.Description = Description;
     this.Quantity = quantity;
     this.Price = price;
     this.NonSubjectsSales = NonSubjectsSales;
@@ -341,8 +341,8 @@ const CreateInvoice = () => {
                     <TextField
                       onChange={(event) => handleChangeInventoryItem(index, event)}
                       label="Descripcion"
-                      name="description"
-                      id="description"
+                      name="Description"
+                      id="Description"
                       size="small"
                       variant="outlined"
                       fullWidth
