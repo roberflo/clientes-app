@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import PrintInvoice from "../../components/PrintInvoice/PrintInvoice";
 import PrintInvoiceCF from "../../components/PrintInvoice/PrintInvoiceCF";
@@ -39,7 +39,7 @@ var invoiceEmpty = {
   Total: 5,
   Description: "Descripcion",
   Status: "PaymentDone",
-  DteId: "1",
+  DteId: "3",
   InvoiceItems: [
     {
       Description: "Prueba 1",
@@ -84,13 +84,20 @@ function InvoiceViewPrint(props: any) {
       })
       .catch((error) => console.log("Authorization Failed : " + error.message));
   };
+  useEffect(() => {
+    getInvoiceById();
+  }, []);
   return (
     <>
       <Card>
         <CardActionArea>
           <CardContent id="print">
-            {invoiceSelected.DteId == "2" && <PrintInvoice invoiceSelected={invoiceSelected} />}
-            {invoiceSelected.DteId == "1" && <PrintInvoiceCF invoiceSelected={invoiceSelected} />}
+            {invoiceSelected.DteId}
+            {invoiceSelected.DteId === "1" ? (
+              <PrintInvoice invoiceSelected={invoiceSelected} />
+            ) : (
+              <PrintInvoiceCF invoiceSelected={invoiceSelected} />
+            )}
           </CardContent>
         </CardActionArea>
         <CardActions>
