@@ -87,11 +87,9 @@ function InvoiceViewPrint(props: any) {
   return (
     <>
       <Card>
-        {invoiceSelected.DteId === "2" && <Typography>Credito Fiscal</Typography>}
-        {invoiceSelected.DteId === "1" && <Typography>Factura Consumidor Final</Typography>}
         <CardActionArea>
           <CardContent id="print">
-            {invoiceSelected.DteId === "2" && <PrintInvoice invoiceSelected={invoiceSelected} />}
+            {invoiceSelected.DteId == "2" && <PrintInvoice invoiceSelected={invoiceSelected} />}
             {invoiceSelected.DteId == "1" && <PrintInvoiceCF invoiceSelected={invoiceSelected} />}
           </CardContent>
         </CardActionArea>
