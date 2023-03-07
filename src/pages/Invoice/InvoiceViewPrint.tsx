@@ -92,7 +92,6 @@ function InvoiceViewPrint(props: any) {
       <Card>
         <CardActionArea>
           <CardContent id="print">
-            {invoiceSelected.DteId}
             {invoiceSelected.DteId === "1" ? (
               <PrintInvoice invoiceSelected={invoiceSelected} />
             ) : (

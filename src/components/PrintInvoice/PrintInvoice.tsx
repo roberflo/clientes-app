@@ -117,7 +117,6 @@ function Year(dateString: string) {
 const PrintInvoice = (props: any) => {
   return (
     <>
-      <h1>Consumidor Final</h1>
       <div id="print">
         <table border={1}>
           <tr>
