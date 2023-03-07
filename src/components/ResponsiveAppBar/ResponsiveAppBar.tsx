@@ -25,6 +25,7 @@ import "./ResponsiveAppBar.scss";
 import Page404 from "../../pages/Page404/Page404";
 import CreateInvoice from "../../pages/CreateInvoice/CreateInvoice";
 import PrintInvoice from "../PrintInvoice/PrintInvoice";
+import InvoiceViewPrint from "../../pages/Invoice/InvoiceViewPrint";
 const drawerWidth = 240;
 
 interface Props {
@@ -197,7 +198,7 @@ export default function ResponsiveDrawer(props: Props) {
           <Route path="/customers" element={<Customer />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/CreateInvoice" element={<CreateInvoice />} />
-          <Route path="/testPrint" element={<PrintInvoice />} />
+          <Route path="/invoiceView/:id" element={<InvoiceViewPrint />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </Box>

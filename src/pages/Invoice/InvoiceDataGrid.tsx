@@ -9,6 +9,7 @@ import axios from "axios";
 import ConfirmDialog from "../../components/ConfirmationDialog/ConfirmationDialog";
 import PrintInvoice from "../../components/PrintInvoice/PrintInvoice";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import { useNavigate } from "react-router-dom";
 
 var initialRows = [
   {
@@ -32,52 +33,13 @@ var initialRows = [
   },
 ];
 
-var invoiceEmpty = {
-  id: 0,
-  CreatedAt: new Date(),
-  DocumentType: "Factura",
-
-  //client
-  CustomerName: "Cliente",
-  Address: "Direccion",
-  TaxId: "tax",
-  CustomerId: 100,
-
-  //invoice or client company?
-  AccountOf: "Company",
-
-  ExcentSales: 1,
-  NonSubjectsSales: 2,
-  SubTotal: 3,
-  IVA: 4,
-  Total: 5,
-  Description: "Descripcion",
-  Status: "PaymentDone",
-  InvoiceItems: [
-    {
-      Description: "Prueba 1",
-      Quantity: "2",
-      Price: "15",
-      NonSubjectsSales: 0,
-      ExcentSales: 0,
-    },
-    {
-      Description: "Prueba 2",
-      Quantity: "5",
-      Price: "18",
-      NonSubjectsSales: 0,
-      ExcentSales: 0,
-    },
-  ],
-};
-
 type Row = typeof initialRows[number];
 
 const InvoiceDataGrid = () => {
+  const navigate = useNavigate();
   const [rows, setRows] = React.useState<Row[]>(initialRows);
   const [IsLoading, setIsLoading] = React.useState(true);
   const [invoiceId, setInvoiceId] = React.useState<GridRowId>(0);
-  const [invoiceSelected, setinvoiceSelected] = React.useState(invoiceEmpty);
   const [openDialog, setopenDialog] = React.useState(false);
   const [openPrintDialogFlag, setopenPrintDialogFlag] = React.useState(false);
   //action
@@ -87,30 +49,6 @@ const InvoiceDataGrid = () => {
       .then((data) => {
         setRows(data.data);
         setIsLoading(false);
-      })
-      .catch((error) => console.log("Authorization Failed : " + error.message));
-  };
-
-  const getInvoiceById = async (id: GridRowId) => {
-    await axios
-      .get(`${import.meta.env.VITE_APP_BASEURL}/invoices/${id}`)
-      .then((data) => {
-        let itemEmpty = {
-          Description: "",
-          Quantity: "",
-          Price: "",
-          NonSubjectsSales: null,
-          ExcentSales: null,
-        };
-
-        const itemsCount = data.data[0].InvoiceItems.length;
-
-        for (let index = 0; index <= 12 - itemsCount; index++) {
-          data.data[0].InvoiceItems.push(itemEmpty);
-        }
-
-        setinvoiceSelected(data.data[0]);
-        setopenPrintDialogFlag(true);
       })
       .catch((error) => console.log("Authorization Failed : " + error.message));
   };
@@ -129,15 +67,17 @@ const InvoiceDataGrid = () => {
     []
   );
 
-  const openPrintDialog = React.useCallback(
+  const openPrint = React.useCallback(
     (id: GridRowId) => () => {
       setTimeout(() => {
         //Reset
-        setinvoiceSelected(invoiceEmpty);
         setInvoiceId(id);
 
         //Get invoice by id
-        getInvoiceById(id);
+        //getInvoiceById(id);
+
+        //redirect
+        navigate(`/invoiceView/${id}`);
       });
     },
     []
@@ -287,14 +227,14 @@ const InvoiceDataGrid = () => {
         headerName: "Acciones",
         headerClassName: "table-header",
         getActions: (params) => [
-          <GridActionsCellItem icon={<VisibilityIcon />} label="View" onClick={openPrintDialog(params.id)} />,
+          <GridActionsCellItem icon={<VisibilityIcon />} label="View" onClick={openPrint(params.id)} />,
           // <GridActionsCellItem icon={<EditIcon />} label="Edit" onClick={EditCustomer(params.id)} />,
           <GridActionsCellItem icon={<DeleteIcon />} label="Delete" onClick={openDeleteDialog(params.id)} />,
         ],
       },
     ],
     // [EditCustomer, DeleteCustomer]
-    [openDeleteDialog, openPrintDialog]
+    [openDeleteDialog, openPrint]
   );
 
   return (
@@ -307,14 +247,6 @@ const InvoiceDataGrid = () => {
         closeDialog={() => {
           setopenDialog(false);
         }}
-      />
-
-      <PrintInvoice
-        closeDialog={() => {
-          setopenPrintDialogFlag(false);
-        }}
-        openDialog={openPrintDialogFlag}
-        invoiceSelected={invoiceSelected}
       />
     </>
   );
