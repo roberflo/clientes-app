@@ -106,11 +106,17 @@ const InvoiceDataGrid = () => {
 
   const columns = React.useMemo<GridColumns<Row>>(
     () => [
-      { field: "id", headerName: "DT", width: 70, headerAlign: "center", headerClassName: "table-header" },
+      { 
+          field: "id", 
+          headerName: "Codigo", 
+          width: 70, 
+          headerAlign: "center", 
+          headerClassName: "table-header" 
+      },
       {
         field: "CreatedAt",
         headerName: "Fecha",
-        width: 100,
+        width: 120,
         editable: false,
         headerAlign: "center",
         type: "date",
@@ -142,12 +148,21 @@ const InvoiceDataGrid = () => {
       },
       {
         field: "TaxId",
-        headerName: "Credito Fiscal",
+        headerName: "NRC",
         width: 100,
         editable: false,
         headerAlign: "center",
         headerClassName: "table-header",
       },
+      {
+        field: "CodeMH",
+        headerName: "Documento",
+        width: 100,
+        editable: false,
+        headerAlign: "center",
+        headerClassName: "table-header",
+      },
+      /*/
       {
         field: "SubTotal",
         headerName: "SubTotal",
@@ -182,6 +197,7 @@ const InvoiceDataGrid = () => {
           return `${"$" + valueFormatted}`;
         },
       },
+      /*/
       {
         field: "Total",
         headerName: "Total",
@@ -211,7 +227,8 @@ const InvoiceDataGrid = () => {
           return <Chip variant="outlined" {...StatusChips(params)} />;
         },
       },
-      /*/ {
+      /*/ 
+      {
         field: "Address",
         headerName: "Direccion",
         width: 250,

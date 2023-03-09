@@ -184,6 +184,8 @@ const CreateInvoice = () => {
       Address: customer.Address,
       TaxId: customer.TaxId,
       CustomerId: customer.id,
+      DUI: customer.DUI,
+      NIT: customer.NIT,
 
       //invoice or client company?
       AccountOf: customer.Company,
@@ -312,7 +314,7 @@ const CreateInvoice = () => {
                 />
               </Typography>
               <Typography variant="caption" gutterBottom>
-                Credito Fiscal: {customer.TaxId}
+                NRC: {customer.TaxId} | NIT: {customer.NIT} | DUI: {customer.DUI} 
               </Typography>
               <Typography variant="caption" gutterBottom>
                 {customer.Address}
