@@ -124,13 +124,13 @@ function Year(dateString: string) {
 }
 */
 
-const PrintInvoice = (props: any) => {
+const PrintInvoiceCF = (props: any) => {
   return (
     <>
       <div id="print">
         <table border={1}>
           <tr>
-            <td colSpan={8} className="row-height-principales"></td>
+            <td colSpan={8} className="row-height-principales">Credito Fiscal</td>
           </tr>
           <tr>
             <td colSpan={8} className="row-height-principales"></td>
@@ -239,4 +239,4 @@ const PrintInvoice = (props: any) => {
   );
 };
 
-export default PrintInvoice;
+export default PrintInvoiceCF;
