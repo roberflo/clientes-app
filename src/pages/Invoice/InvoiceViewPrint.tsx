@@ -76,8 +76,10 @@ function InvoiceViewPrint(props: any) {
         };
 
         const itemsCount = data.data[0].InvoiceItems.length;
+        let lineas = 12;
+        if (data.data[0].DteId == 2) { lineas = 10; }
 
-        for (let index = 0; index <= 12 - itemsCount; index++) {
+        for (let index = 0; index <= lineas - itemsCount; index++) {
           data.data[0].InvoiceItems.push(itemEmpty);
         }
 

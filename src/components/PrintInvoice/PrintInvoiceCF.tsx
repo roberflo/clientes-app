@@ -157,7 +157,7 @@ const PrintInvoiceCF = (props: any) => {
               {props.invoiceSelected.CustomerName}
             </td>
             <td className="row-text-size-nombreCliente">
-              No. {props.invoiceSelected.id}
+              No. {props.invoiceSelected.CodigoInterno}
             </td>
           </tr>
           <tr>

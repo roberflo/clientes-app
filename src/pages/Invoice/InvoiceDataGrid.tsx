@@ -107,7 +107,7 @@ const InvoiceDataGrid = () => {
   const columns = React.useMemo<GridColumns<Row>>(
     () => [
       { 
-          field: "id", 
+          field: "CodigoInterno", 
           headerName: "Codigo", 
           width: 70, 
           headerAlign: "center", 

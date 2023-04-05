@@ -140,7 +140,7 @@ const PrintInvoice = (props: any) => {
             <td className="row-padding-left-nombreCliente" colSpan={6}>
               {props.invoiceSelected.CustomerName}
             </td>
-            <td>No. {props.invoiceSelected.id}</td>
+            <td>No. {props.invoiceSelected.CodigoInterno}</td>
           </tr>
           <tr>
             <td></td>
