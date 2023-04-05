@@ -38,11 +38,15 @@
   
   //Clases funcionales
   .row-column-width-detalle {
-    column-width: 30px !important;
+    column-width: 45px !important;
   }
   
   .row-column-width-detalle-2 {
-    column-width: 20px !important;
+    column-width: 35px !important;
+  }
+
+  .row-column-width-detalle-3 {
+    column-width: 55px !important;
   }
   
   .row-column-width-encabezado {
@@ -78,7 +82,11 @@
   }
   
   .column-align-center-dia {
-    text-align: center !important;
+    text-align: left !important;
+  }
+
+  .column-align-center-anio {
+    text-align: right !important;
   }
   
   .column-align-right-fecha {
@@ -99,6 +107,14 @@
   
   .row-text-size-fecha {
     font-size: 12px;
+  }
+
+  .row-text-size-nombreCliente {
+    font-size: 12px;
+  }
+
+  .row-text-size-datos {
+    font-size: 9px;
   }
   
   .row-text-size-totalEnLetras {
@@ -130,9 +146,13 @@
   }
   
   .row-padding-left-direccion {
-    padding-left: 35px;
+    padding-left: 20px;
+  }
+
+  .row-padding-left-condicionPago {
+    padding-left: 60px;
   }
   
   .row-padding-left-cantidad {
-    padding-left: 20px;
+    padding-left: 15px;
   }

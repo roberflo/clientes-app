@@ -130,41 +130,68 @@ const PrintInvoiceCF = (props: any) => {
       <div id="print">
         <table border={1}>
           <tr>
-            <td colSpan={8} className="row-height-principales">Credito Fiscal</td>
-          </tr>
-          <tr>
             <td colSpan={8} className="row-height-principales"></td>
           </tr>
-          <tr className="row-height-encabezado column-align-right-fecha">
-            <td colSpan={4} className="row-column-width-encabezado"></td>
-            <td className="row-text-size-fecha column-align-center-dia">{Day(props.invoiceSelected.CreatedAt)}</td>
-            <td></td>
-            <td className="row-text-size-fecha row-padding-left-mes">{Month(props.invoiceSelected.CreatedAt)}</td>
-            <td className="row-text-size-fecha row-padding-left-anio">{Year(props.invoiceSelected.CreatedAt)}</td>
+          {/* <tr>
+            <td colSpan={8} className="row-height-principales"></td>
+          </tr> */}
+          <tr className="row-height-fecha">
+            <th colSpan={8}></th>
           </tr>
           <tr className="row-height-fecha">
             <th colSpan={8}></th>
           </tr>
+          <tr className="row-height-fecha">
+            <th colSpan={8}></th>
+          </tr>
+          <tr className="row-height-encabezado column-align-right-fecha">
+            <td colSpan={4} className="row-column-width-encabezado"></td>
+            <td></td>
+            <td className="row-text-size-fecha column-align-center-dia">{Day(props.invoiceSelected.CreatedAt)}</td>
+            <td className="row-text-size-fecha row-padding-left-mes">{Month(props.invoiceSelected.CreatedAt)}</td>
+            <td className="row-text-size-fecha column-align-center-anio">{Year(props.invoiceSelected.CreatedAt)}</td>
+          </tr>
           <tr>
             <td></td>
-            <td className="row-padding-left-nombreCliente" colSpan={6}>
+            <td className="row-text-size-nombreCliente row-padding-left-nombreCliente" colSpan={6}>
               {props.invoiceSelected.CustomerName}
             </td>
-            <td>No. {props.invoiceSelected.id}</td>
+            <td className="row-text-size-nombreCliente">
+              No. {props.invoiceSelected.id}
+            </td>
           </tr>
           <tr>
             <td></td>
-            <td className="row-padding-left-direccion" colSpan={7}>
+            <td className="row-text-size-datos row-padding-left-direccion" colSpan={3}>
               {props.invoiceSelected.Address}
             </td>
+            <td className="row-text-size-datos row-padding-left-dui" colSpan={4}>
+              {props.invoiceSelected.NIT}
+            </td>
           </tr>
           <tr>
             <td></td>
-            <td className="row-padding-left-ventaACuentaDe" colSpan={3}>
+            <td className="row-text-size-datos row-padding-left-direccion" colSpan={3}>
               {props.invoiceSelected.AccountOf}
             </td>
-            <td className="row-padding-left-dui" colSpan={4}>
-              {props.invoiceSelected.DUI}
+            <td className="row-text-size-datos row-padding-left-dui" colSpan={4}>
+              {props.invoiceSelected.TaxId}
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td className="row-text-size-datos row-padding-left-condicionPago" colSpan={3}>
+              Contado
+            </td>
+            <td className="row-text-size-datos row-padding-left-dui" colSpan={4}>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td className="row-text-size-datos row-padding-left-condicionPago" colSpan={3}>
+              .
+            </td>
+            <td className="row-text-size-datos row-padding-left-dui" colSpan={4}>
             </td>
           </tr>
           <tr className="row-height-detalle">
@@ -184,8 +211,10 @@ const PrintInvoiceCF = (props: any) => {
                 <td className="row-text-size-items column-align-right-totales row-column-width-detalle-2">
                   {item.NonSubjectsSales < 1 ? "" : `$${item.NonSubjectsSales}`}
                 </td>
-                <td className="row-text-size-items column-align-right-totales">{item.ExcentSales < 1 ? "" : `$${item.ExcentSales}`}</td>
                 <td className="row-text-size-items column-align-right-totales">
+                  {item.ExcentSales < 1 ? "" : `$${item.ExcentSales}`}
+                </td>
+                <td className="row-text-size-items column-align-right-totales row-column-width-detalle-3">
                   {item.Quantity < 1 ? "" : `$${(item.Quantity * item.Price).toFixed(2)}`}
                 </td>
               </tr>
