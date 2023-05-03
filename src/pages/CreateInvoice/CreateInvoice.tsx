@@ -24,6 +24,7 @@ import Switch from "@mui/material/Switch";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 type Customer = {
   id: number;
@@ -102,8 +103,8 @@ const CreateInvoice = () => {
   const [locale, setLocale] = useState("es");
   const [openSuccess, setOpenSuccess] = useState(false);
   const [customerList, setcustomerList] = useState<Customer[]>([customerEmpty]);
-
   const [customer, setCustomer] = useState<Customer>(customerEmpty);
+  const navigate = useNavigate();
 
   const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === "clickaway") {
@@ -166,7 +167,12 @@ const CreateInvoice = () => {
         setOpenSuccess(true);
         clearForm();
       })
-      .catch((error) => console.log("Authorization Failed : " + error.message));
+      .catch((error) => console.log("Authorization Failed : " + error.message))
+      .finally(() => {
+        setTimeout(() => {
+          navigate(`/invoices`);
+        }, 2000);
+      });
   };
 
   function CreateInvoiceAction() {
@@ -314,7 +320,7 @@ const CreateInvoice = () => {
                 />
               </Typography>
               <Typography variant="caption" gutterBottom>
-                NRC: {customer.TaxId} | NIT: {customer.NIT} | DUI: {customer.DUI} 
+                NRC: {customer.TaxId} | NIT: {customer.NIT} | DUI: {customer.DUI}
               </Typography>
               <Typography variant="caption" gutterBottom>
                 {customer.Address}

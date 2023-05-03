@@ -6,6 +6,7 @@ import { useParams } from "react-router";
 import axios from "axios";
 import Card from "@mui/material/Card";
 import { CardActionArea, CardMedia, CardContent, Typography, CardActions, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 function printOut(divId: string) {
   if (document != null) {
@@ -14,7 +15,6 @@ function printOut(divId: string) {
     document.body.innerHTML = printOutContent == undefined ? "" : printOutContent;
     window.print();
     document.body.innerHTML = originalContent;
-    window.location.reload();
     return false;
   }
 }
@@ -61,6 +61,7 @@ var invoiceEmpty = {
 
 function InvoiceViewPrint(props: any) {
   let params = useParams();
+  const navigate = useNavigate();
   const [invoiceSelected, setinvoiceSelected] = React.useState(invoiceEmpty);
 
   const getInvoiceById = async () => {
@@ -77,7 +78,9 @@ function InvoiceViewPrint(props: any) {
 
         const itemsCount = data.data[0].InvoiceItems.length;
         let lineas = 12;
-        if (data.data[0].DteId == 2) { lineas = 10; }
+        if (data.data[0].DteId == 2) {
+          lineas = 10;
+        }
 
         for (let index = 0; index <= lineas - itemsCount; index++) {
           data.data[0].InvoiceItems.push(itemEmpty);
@@ -108,6 +111,7 @@ function InvoiceViewPrint(props: any) {
             color="primary"
             onClick={() => {
               printOut("print");
+              navigate(`/invoices`);
             }}
           >
             PRINT
