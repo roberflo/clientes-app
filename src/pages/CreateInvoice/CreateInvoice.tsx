@@ -127,9 +127,22 @@ const CreateInvoice = () => {
     setDocumentType(event.target.checked);
   };
 
+  const handleChangeInventoryItemNumeric = (index: number, event: any) => {
+    const values = [...InvoiceItems];
+    let _index = index;
+    if (event.target.value > 0) {
+      values[_index][event.target.name] = event.target.value;
+      console.log(values);
+      setInvoiceItems(values);
+    } else {
+      event.target.value = "";
+    }
+  };
+
   const handleChangeInventoryItem = (index: number, event: any) => {
     const values = [...InvoiceItems];
     let _index = index;
+
     values[_index][event.target.name] = event.target.value;
     console.log(values);
     setInvoiceItems(values);
@@ -360,7 +373,7 @@ const CreateInvoice = () => {
                 <Grid xs={2} md={1} sx={{ mt: 1, mb: 1 }}>
                   <Typography variant="caption" gutterBottom>
                     <TextField
-                      onChange={(event) => handleChangeInventoryItem(index, event)}
+                      onChange={(event) => handleChangeInventoryItemNumeric(index, event)}
                       label="Cantidad"
                       name="Quantity"
                       id="Quantity"
@@ -368,6 +381,9 @@ const CreateInvoice = () => {
                       variant="outlined"
                       type="number"
                       fullWidth
+                      InputProps={{
+                        inputProps: { min: 0 },
+                      }}
                     />
                   </Typography>
                 </Grid>
@@ -375,7 +391,7 @@ const CreateInvoice = () => {
                 <Grid xs={2} md={2} sx={{ mt: 1, mb: 1 }}>
                   <Typography variant="caption" gutterBottom>
                     <TextField
-                      onChange={(event) => handleChangeInventoryItem(index, event)}
+                      onChange={(event) => handleChangeInventoryItemNumeric(index, event)}
                       label="Precio"
                       name="Price"
                       id="Price"
@@ -383,13 +399,16 @@ const CreateInvoice = () => {
                       variant="outlined"
                       type="number"
                       fullWidth
+                      InputProps={{
+                        inputProps: { min: 0 },
+                      }}
                     />
                   </Typography>
                 </Grid>
                 <Grid xs={2} md={2} sx={{ mt: 1, mb: 1 }}>
                   <Typography variant="caption" gutterBottom>
                     <TextField
-                      onChange={(event) => handleChangeInventoryItem(index, event)}
+                      onChange={(event) => handleChangeInventoryItemNumeric(index, event)}
                       label="NoSujetas"
                       name="NonSubjectsSales"
                       id="NonSubjectsSales"
@@ -397,6 +416,9 @@ const CreateInvoice = () => {
                       variant="outlined"
                       type="number"
                       fullWidth
+                      InputProps={{
+                        inputProps: { min: 0 },
+                      }}
                     />
                   </Typography>
                 </Grid>
@@ -404,20 +426,23 @@ const CreateInvoice = () => {
                   <Typography variant="caption" gutterBottom>
                     <TextField
                       label="Exentas"
-                      onChange={(event) => handleChangeInventoryItem(index, event)}
+                      onChange={(event) => handleChangeInventoryItemNumeric(index, event)}
                       name="ExcentSales"
                       id="ExcentSales"
                       size="small"
                       variant="outlined"
                       type="number"
                       fullWidth
+                      InputProps={{
+                        inputProps: { min: 0 },
+                      }}
                     />
                   </Typography>
                 </Grid>
                 <Grid xs={2} md={2} sx={{ mt: 1, mb: 1 }}>
                   <Typography variant="caption" gutterBottom>
                     <TextField
-                      onChange={(event) => handleChangeInventoryItem(index, event)}
+                      onChange={(event) => handleChangeInventoryItemNumeric(index, event)}
                       label="Afectas"
                       name="SubTotal"
                       id="SubTotal"
@@ -425,6 +450,9 @@ const CreateInvoice = () => {
                       variant="outlined"
                       type="number"
                       fullWidth
+                      InputProps={{
+                        inputProps: { min: 0 },
+                      }}
                     />
                   </Typography>
                 </Grid>

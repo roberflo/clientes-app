@@ -15,6 +15,7 @@ function printOut(divId: string) {
     document.body.innerHTML = printOutContent == undefined ? "" : printOutContent;
     window.print();
     document.body.innerHTML = originalContent;
+    window.location.reload();
     return false;
   }
 }
@@ -111,7 +112,6 @@ function InvoiceViewPrint(props: any) {
             color="primary"
             onClick={() => {
               printOut("print");
-              navigate(`/invoices`);
             }}
           >
             PRINT

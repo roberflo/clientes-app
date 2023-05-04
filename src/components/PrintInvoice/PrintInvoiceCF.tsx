@@ -7,16 +7,6 @@ import DialogTitle from "@mui/material/DialogTitle";
 import "./PrintInvoiceCF.scss";
 import { parseJSON, parse } from "date-fns";
 
-function printOut(divId: string) {
-  if (document != null) {
-    var printOutContent = document.getElementById(divId)?.innerHTML;
-    var originalContent = document.body.innerHTML;
-    document.body.innerHTML = printOutContent == undefined ? "" : printOutContent;
-    window.print();
-    document.body.innerHTML = originalContent;
-  }
-}
-
 function numberToWords(number: any): string {
   // Arreglo de unidades
   var unidades = [
@@ -156,9 +146,7 @@ const PrintInvoiceCF = (props: any) => {
             <td className="row-text-size-nombreCliente row-padding-left-nombreCliente" colSpan={6}>
               {props.invoiceSelected.CustomerName}
             </td>
-            <td className="row-text-size-nombreCliente">
-              No. {props.invoiceSelected.CodigoInterno}
-            </td>
+            <td className="row-text-size-nombreCliente">No. {props.invoiceSelected.CodigoInterno}</td>
           </tr>
           <tr>
             <td></td>
@@ -183,16 +171,14 @@ const PrintInvoiceCF = (props: any) => {
             <td className="row-text-size-datos row-padding-left-condicionPago" colSpan={3}>
               Contado
             </td>
-            <td className="row-text-size-datos row-padding-left-dui" colSpan={4}>
-            </td>
+            <td className="row-text-size-datos row-padding-left-dui" colSpan={4}></td>
           </tr>
           <tr>
             <td></td>
             <td className="row-text-size-datos row-padding-left-condicionPago" colSpan={3}>
               .
             </td>
-            <td className="row-text-size-datos row-padding-left-dui" colSpan={4}>
-            </td>
+            <td className="row-text-size-datos row-padding-left-dui" colSpan={4}></td>
           </tr>
           <tr className="row-height-detalle">
             <th colSpan={8}></th>
@@ -211,9 +197,7 @@ const PrintInvoiceCF = (props: any) => {
                 <td className="row-text-size-items column-align-right-totales row-column-width-detalle-2">
                   {item.NonSubjectsSales < 1 ? "" : `$${item.NonSubjectsSales}`}
                 </td>
-                <td className="row-text-size-items column-align-right-totales">
-                  {item.ExcentSales < 1 ? "" : `$${item.ExcentSales}`}
-                </td>
+                <td className="row-text-size-items column-align-right-totales">{item.ExcentSales < 1 ? "" : `$${item.ExcentSales}`}</td>
                 <td className="row-text-size-items column-align-right-totales row-column-width-detalle-3">
                   {item.Quantity < 1 ? "" : `$${(item.Quantity * item.Price).toFixed(2)}`}
                 </td>
