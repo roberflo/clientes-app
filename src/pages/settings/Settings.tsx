@@ -16,7 +16,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const correlativeEmpty = {
-  id: "",
+  id: 0,
   CodeMH: "",
   Description: "",
   CodigoInterno: "",
@@ -38,8 +38,8 @@ export const Settings = () => {
       .get(`${import.meta.env.VITE_APP_BASEURL}/correlative`)
       .then((response) => {
         console.log(response.data);
-        let consumidorFinal = response.data.find((data: { id: string }) => data.id === "1");
-        let creditoFiscal = response.data.find((data: { id: string }) => data.id === "2");
+        let consumidorFinal = response.data.find((data: { id: string }) => Number(data.id) === 1);
+        let creditoFiscal = response.data.find((data: { id: string }) => Number(data.id) === 2);
         console.log(consumidorFinal);
         console.log(creditoFiscal);
 
