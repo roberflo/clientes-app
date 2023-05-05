@@ -10,6 +10,7 @@ import ConfirmDialog from "../../components/ConfirmationDialog/ConfirmationDialo
 import PrintInvoice from "../../components/PrintInvoice/PrintInvoice";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useNavigate } from "react-router-dom";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 var initialRows = [
   {
@@ -215,6 +216,7 @@ const InvoiceDataGrid = () => {
           return `${"$" + valueFormatted}`;
         },
       },
+      /*/
       {
         field: "Status",
         headerName: "Estado",
@@ -226,8 +228,7 @@ const InvoiceDataGrid = () => {
         renderCell: (params) => {
           return <Chip variant="outlined" {...StatusChips(params)} />;
         },
-      },
-      /*/ 
+      }, 
       {
         field: "Address",
         headerName: "Direccion",
@@ -246,7 +247,7 @@ const InvoiceDataGrid = () => {
         getActions: (params) => [
           <GridActionsCellItem icon={<VisibilityIcon />} label="View" onClick={openPrint(params.id)} />,
           // <GridActionsCellItem icon={<EditIcon />} label="Edit" onClick={EditCustomer(params.id)} />,
-          <GridActionsCellItem icon={<DeleteIcon />} label="Delete" onClick={openDeleteDialog(params.id)} />,
+          <GridActionsCellItem icon={<CancelIcon />} label="Anular" onClick={openDeleteDialog(params.id)} />,
         ],
       },
     ],
@@ -258,7 +259,7 @@ const InvoiceDataGrid = () => {
     <>
       <DataGrid loading={IsLoading} rows={rows} columns={columns} localeText={GRID_DEFAULT_LOCALE_TEXT} />
       <ConfirmDialog
-        message={"Seguro que deseas eliminar este documento tributario?"}
+        message={"Seguro que deseas anular este documento tributario?"}
         onSubmit={DeleteInvoiceAction(invoiceId)}
         openDialog={openDialog}
         closeDialog={() => {

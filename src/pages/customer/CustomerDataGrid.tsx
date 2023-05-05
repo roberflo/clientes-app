@@ -5,6 +5,8 @@ import { GRID_DEFAULT_LOCALE_TEXT } from "../../components/DataGridCustom/DataGr
 import "../../components/DataGridCustom/tableStyle.scss";
 import axios from "axios";
 import ConfirmDialog from "../../components/ConfirmationDialog/ConfirmationDialog";
+import CancelIcon from "@mui/icons-material/Cancel";
+import EditIcon from "@mui/icons-material/Edit";
 
 const initialRows = [
   {
@@ -118,8 +120,8 @@ export default function CustomerDataGrid(reloadTrigger: any) {
         headerName: "Acciones",
         headerClassName: "table-header",
         getActions: (params) => [
-          // <GridActionsCellItem icon={<EditIcon />} label="Edit" onClick={EditCustomer(params.id)} />,
-          <GridActionsCellItem icon={<DeleteIcon />} label="Delete" onClick={openDeleteDialog(params.id)} />,
+          <GridActionsCellItem icon={<EditIcon />} label="Edit" onClick={EditCustomer(params.id)} />,
+          <GridActionsCellItem icon={<CancelIcon />} label="Inactivar" onClick={openDeleteDialog(params.id)} />,
           // <GridActionsCellItem icon={<FileCopyIcon />} label="Crear Factura" onClick={CreateInvoice(params.id)} showInMenu />,
         ],
       },
@@ -134,7 +136,7 @@ export default function CustomerDataGrid(reloadTrigger: any) {
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid loading={IsLoading} columns={columns} rows={rows} localeText={GRID_DEFAULT_LOCALE_TEXT} />
       <ConfirmDialog
-        message={"Seguro que deseas eliminar este cliente?"}
+        message={"Seguro que deseas dejar como inactivo este cliente?"}
         onSubmit={DeleteCustomerAction(customerId)}
         openDialog={openDialog}
         closeDialog={() => {
