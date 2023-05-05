@@ -31,6 +31,7 @@ var initialRows = [
     Description: "0",
     CustomerId: "0",
     Status: "PaymentDone",
+    Anulado: "Anulado",
   },
 ];
 
@@ -88,7 +89,7 @@ const InvoiceDataGrid = () => {
     (id: GridRowId) => () => {
       setTimeout(() => {
         setIsLoading(true);
-        setRows((prevRows) => prevRows.filter((row) => row.id !== id));
+        //setRows((prevRows) => prevRows.filter((row) => row.id !== id));
         DeleteInvoice(id);
         setopenDialog(false);
       });
@@ -162,6 +163,23 @@ const InvoiceDataGrid = () => {
         editable: false,
         headerAlign: "center",
         headerClassName: "table-header",
+      },
+      {
+        field: "Anulado",
+        headerName: "Anulado",
+        width: 100,
+        editable: false,
+        headerAlign: "center",
+        headerClassName: "table-header",
+        valueFormatter: (params: GridValueFormatterParams<number>) => {
+          if (params.value == 0) {
+            return "";
+          }
+
+          if (params.value == 1) {
+            return "Anulado";
+          }
+        },
       },
       /*/
       {

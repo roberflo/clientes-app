@@ -1,5 +1,5 @@
 import React, { useEffect, useImperativeHandle } from "react";
-import { DataGrid, GridActionsCellItem, GridRowId, GridColumns, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid, GridValueFormatterParams, GridActionsCellItem, GridRowId, GridColumns, GridToolbar } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { GRID_DEFAULT_LOCALE_TEXT } from "../../components/DataGridCustom/DataGridLocales";
 import "../../components/DataGridCustom/tableStyle.scss";
@@ -19,6 +19,7 @@ const initialRows = [
     NIT: "cargando",
     DUI: "cargando",
     Company: "cargando",
+    Activo: "cargando"
   },
 ];
 
@@ -72,7 +73,7 @@ export default function CustomerDataGrid(reloadTrigger: any) {
   const DeleteCustomerAction = React.useCallback(
     (id: GridRowId) => () => {
       setTimeout(() => {
-        setRows((prevRows) => prevRows.filter((row) => row.id !== id));
+        //setRows((prevRows) => prevRows.filter((row) => row.id !== id));
         DeleteCustomer(id);
         setIsLoading(true);
         setopenDialog(false);
@@ -81,10 +82,20 @@ export default function CustomerDataGrid(reloadTrigger: any) {
     []
   );
 
-  const EditCustomer = React.useCallback(
+  const EditCustomer = async (id: GridRowId) => {
+    await axios
+      .delete(`${import.meta.env.VITE_APP_BASEURL}/customers/${id}`)
+      .then((data) => {
+        setIsLoading(false);
+      })
+      .catch((error) => console.log("Authorization Failed : " + error.message));
+  };
+
+  const EditCustomerAction = React.useCallback(
     (id: GridRowId) => () => {
       setTimeout(() => {
-        setRows((prevRows) => prevRows.filter((row) => row.id !== id));
+        //setRows((prevRows) => prevRows.filter((row) => row.id !== id));
+        EditCustomer(id);
       });
     },
     []
@@ -114,20 +125,37 @@ export default function CustomerDataGrid(reloadTrigger: any) {
       },
       { field: "Company", headerName: "Empresa", type: "string", width: 120, headerAlign: "center", headerClassName: "table-header" },
       {
+        field: "Activo",
+        headerName: "Activo",
+        width: 100,
+        editable: false,
+        headerAlign: "center",
+        headerClassName: "table-header",
+        valueFormatter: (params: GridValueFormatterParams<number>) => {
+          if (params.value == 0) {
+            return "";
+          }
+
+          if (params.value == 1) {
+            return "Inactivo";
+          }
+        },
+      },
+      {
         field: "actions",
         type: "actions",
         width: 190,
         headerName: "Acciones",
         headerClassName: "table-header",
         getActions: (params) => [
-          <GridActionsCellItem icon={<EditIcon />} label="Edit" onClick={EditCustomer(params.id)} />,
+          <GridActionsCellItem icon={<EditIcon />} label="Edit" onClick={EditCustomerAction(params.id)} />,
           <GridActionsCellItem icon={<CancelIcon />} label="Inactivar" onClick={openDeleteDialog(params.id)} />,
           // <GridActionsCellItem icon={<FileCopyIcon />} label="Crear Factura" onClick={CreateInvoice(params.id)} showInMenu />,
         ],
       },
     ],
     // [EditCustomer, DeleteCustomer, CreateInvoice]
-    [openDeleteDialog]
+    [openDeleteDialog, EditCustomerAction]
   );
   //Full grid
   //       <DataGrid columns={columns} rows={rows} localeText={GRID_DEFAULT_LOCALE_TEXT} components={{ Toolbar: GridToolbar }} />
