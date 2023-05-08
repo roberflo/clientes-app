@@ -19,11 +19,11 @@ const initialRows = [
     NIT: "cargando",
     DUI: "cargando",
     Company: "cargando",
-    Activo: "cargando"
+    Activo: "cargando",
   },
 ];
 
-type Row = typeof initialRows[number];
+type Row = (typeof initialRows)[number];
 
 export default function CustomerDataGrid(reloadTrigger: any) {
   const [rows, setRows] = React.useState<Row[]>(initialRows);
@@ -82,20 +82,15 @@ export default function CustomerDataGrid(reloadTrigger: any) {
     []
   );
 
-  const EditCustomer = async (id: GridRowId) => {
-    await axios
-      .delete(`${import.meta.env.VITE_APP_BASEURL}/customers/${id}`)
-      .then((data) => {
-        setIsLoading(false);
-      })
-      .catch((error) => console.log("Authorization Failed : " + error.message));
-  };
-
   const EditCustomerAction = React.useCallback(
     (id: GridRowId) => () => {
       setTimeout(() => {
         //setRows((prevRows) => prevRows.filter((row) => row.id !== id));
-        EditCustomer(id);
+
+        console.log("CustomerId");
+        console.log(id);
+        reloadTrigger.openDrawer();
+        reloadTrigger.updateCustomerId(id);
       });
     },
     []

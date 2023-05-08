@@ -22,11 +22,20 @@ export const Customer = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(true);
   const [reloadTrigger, setReloadTrigger] = useState(0);
+  const [customerId, setCustomerId] = useState("");
   const handleCloseDrawer = async () => {
     setIsDrawerOpen(false);
   };
+  const handleOpenDrawer = async () => {
+    setIsDrawerOpen(true);
+  };
   const handleCloseDialog = async () => {
     setIsDialogOpen(false);
+  };
+  const handleCustomer = async (id: any) => {
+    console.log("handleCustomer");
+    console.log(id);
+    setCustomerId(id);
   };
 
   return (
@@ -48,7 +57,7 @@ export const Customer = () => {
         </Item>
         <Item>
           <Box sx={{ height: 400, width: "100%" }}>
-            <CustomerDataGrid reloadTrigger={reloadTrigger} />
+            <CustomerDataGrid reloadTrigger={reloadTrigger} openDrawer={handleOpenDrawer} updateCustomerId={handleCustomer} />
           </Box>
         </Item>
       </Stack>
@@ -56,7 +65,7 @@ export const Customer = () => {
         <Fab size="small" sx={{ mt: 1, mb: 1, ml: 40, mr: 1 }} color="primary" aria-label="add" onClick={handleCloseDrawer}>
           <CloseIcon />
         </Fab>
-        <CustomerForm closeDrawer={handleCloseDrawer} />
+        <CustomerForm closeDrawer={handleCloseDrawer} customerId={customerId} />
       </Drawer>
     </>
   );

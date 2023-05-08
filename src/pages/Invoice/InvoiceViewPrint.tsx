@@ -86,7 +86,7 @@ function InvoiceViewPrint(props: any) {
         for (let index = 0; index <= lineas - itemsCount; index++) {
           data.data[0].InvoiceItems.push(itemEmpty);
         }
-
+        console.log(data.data[0]);
         setinvoiceSelected(data.data[0]);
       })
       .catch((error) => console.log("Authorization Failed : " + error.message));
@@ -116,6 +116,7 @@ function InvoiceViewPrint(props: any) {
           >
             PRINT
           </Button>
+          <Typography>{invoiceSelected.DteId}</Typography>
         </CardActions>
       </Card>
     </>
