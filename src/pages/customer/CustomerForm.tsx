@@ -112,7 +112,7 @@ export const CustomerForm = (props: any) => {
         setTaxId(response.data[0].TaxId);
         setNIT(response.data[0].NIT);
         setDUI(response.data[0].DUI);
-        setActivo(true);
+        setActivo(response.data[0].Activo === 1 ? true : false);
       });
   };
 
@@ -253,10 +253,11 @@ export const CustomerForm = (props: any) => {
             <Stack direction="row" spacing={1} alignItems="center">
               <Typography>Inactivo</Typography>
               <Switch
-                defaultChecked
                 inputProps={{ "aria-label": "Active" }}
                 name="activo"
                 id="activo"
+                value={Activo}
+                checked={Activo}
                 onChange={(data) => setActivo(data.target.checked)}
               />
               <Typography>Activo</Typography>

@@ -128,11 +128,11 @@ export default function CustomerDataGrid(reloadTrigger: any) {
         headerClassName: "table-header",
         valueFormatter: (params: GridValueFormatterParams<number>) => {
           if (params.value == 0) {
-            return "";
+            return "Inactivo";
           }
 
           if (params.value == 1) {
-            return "Inactivo";
+            return "Activo";
           }
         },
       },
