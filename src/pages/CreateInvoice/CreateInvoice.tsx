@@ -25,6 +25,7 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { number } from "yup";
 
 type Customer = {
   id: number;
@@ -68,13 +69,19 @@ class InvoiceItem implements IInvoiceItem {
   NonSubjectsSales: number;
   ExcentSales: number;
   get SubTotal(): number {
-    return this.Price * this.Quantity;
+    let precioUnitarioSinIVA = (this.Price / 1.13) * this.Quantity;
+    let precioUnitarioSinIVARound = precioUnitarioSinIVA.toFixed(6);
+    return parseFloat(precioUnitarioSinIVARound);
   }
   get IVA(): number {
-    return this.SubTotal * 0.13;
+    let valorIVA = this.SubTotal * 0.13
+    let valorIVARound = valorIVA.toFixed(6);
+    return parseFloat(valorIVARound);
   }
   get Total(): number {
-    return this.SubTotal + this.IVA;
+    let totalSinIVA = this.SubTotal + this.IVA;
+    let totalSinIVARound = totalSinIVA.toFixed(6);
+    return parseFloat(totalSinIVARound);
   }
 }
 
