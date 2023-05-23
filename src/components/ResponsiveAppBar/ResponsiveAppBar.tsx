@@ -29,6 +29,7 @@ import InvoiceViewPrint from "../../pages/Invoice/InvoiceViewPrint";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Login from "../../pages/login/Login";
 import SignInSide from "../../pages/login/Login";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 const drawerWidth = 240;
 
@@ -247,14 +248,58 @@ export default function ResponsiveDrawer(props: Props) {
         <Toolbar />
 
         <Routes>
+          <Route
+            path="/home"
+            element={
+              <ProtectedRoute user={user}>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+
           <Route index element={<Login login={login} />} />
-          <Route path="/home" element={<Home />} />
+
           <Route path="/login" element={<SignInSide login={login} />} />
-          <Route path="/invoices" element={<Invoice />} />
-          <Route path="/customers" element={<Customer />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/CreateInvoice" element={<CreateInvoice />} />
-          <Route path="/invoiceView/:id" element={<InvoiceViewPrint />} />
+          <Route
+            path="/invoices"
+            element={
+              <ProtectedRoute user={user}>
+                <Invoice />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/customers"
+            element={
+              <ProtectedRoute user={user}>
+                <Customer />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <ProtectedRoute user={user}>
+                <Settings />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/CreateInvoice"
+            element={
+              <ProtectedRoute user={user}>
+                <CreateInvoice />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/invoiceView/:id"
+            element={
+              <ProtectedRoute user={user}>
+                <InvoiceViewPrint />
+              </ProtectedRoute>
+            }
+          />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </Box>
