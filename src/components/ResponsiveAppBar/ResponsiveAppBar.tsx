@@ -26,6 +26,11 @@ import Page404 from "../../pages/Page404/Page404";
 import CreateInvoice from "../../pages/CreateInvoice/CreateInvoice";
 import PrintInvoice from "../PrintInvoice/PrintInvoice";
 import InvoiceViewPrint from "../../pages/Invoice/InvoiceViewPrint";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import Login from "../../pages/login/Login";
+import SignInSide from "../../pages/login/Login";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+
 const drawerWidth = 240;
 
 interface Props {
@@ -36,9 +41,32 @@ interface Props {
   window?: () => Window;
 }
 
+class User {
+  mail: string;
+  admin: boolean;
+
+  constructor(mail: string, admin: boolean) {
+    this.mail = mail;
+    this.admin = true;
+  }
+}
+
+const emptyUser: User = new User("", false);
+
 export default function ResponsiveDrawer(props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [user, setUser] = React.useState<User>(emptyUser);
+  const [loginText, setLoginText] = React.useState("Iniciar Sesion");
+  const login = () => {
+    let loginUser: User = new User("robertoflores2790@gmail.com", true);
+    setUser(loginUser);
+    setLoginText("Cerrar Sesion");
+  };
+  const logout = () => {
+    setUser(emptyUser);
+    setLoginText("Iniciar Sesion");
+  };
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -46,32 +74,101 @@ export default function ResponsiveDrawer(props: Props) {
 
   const drawer = (
     <div>
-      <List>
-        <NavLink
-          to="/"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  textDecoration: "none",
-                }
-              : { textDecoration: "none" }
-          }
-        >
-          <ListItem key="Inicio" disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <HomeIcon />
-              </ListItemIcon>
-              <ListItemText primary="Inicio" />
-            </ListItemButton>
-          </ListItem>
-        </NavLink>
-      </List>
+      {user.mail !== "" ? (
+        <>
+          <List>
+            <NavLink
+              to="/home"
+              style={({ isActive }) =>
+                isActive
+                  ? {
+                      textDecoration: "none",
+                    }
+                  : { textDecoration: "none" }
+              }
+            >
+              <ListItem key="Inicio" disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <HomeIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Inicio" />
+                </ListItemButton>
+              </ListItem>
+            </NavLink>
+          </List>
+          <Divider />
+          <List>
+            <NavLink
+              to="/invoices"
+              style={({ isActive }) =>
+                isActive
+                  ? {
+                      textDecoration: "none",
+                    }
+                  : { textDecoration: "none" }
+              }
+            >
+              <ListItem key="Facturas" disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <RequestQuoteIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Documento Tributario" />
+                </ListItemButton>
+              </ListItem>
+            </NavLink>
+            <NavLink
+              to="/customers"
+              style={({ isActive }) =>
+                isActive
+                  ? {
+                      textDecoration: "none",
+                    }
+                  : { textDecoration: "none" }
+              }
+            >
+              <ListItem key="Clientes" disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <PeopleAltIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Clientes" />
+                </ListItemButton>
+              </ListItem>
+            </NavLink>
+          </List>
+          <Divider />
+          <List>
+            <NavLink
+              to="/settings"
+              style={({ isActive }) =>
+                isActive
+                  ? {
+                      textDecoration: "none",
+                    }
+                  : { textDecoration: "none" }
+              }
+            >
+              <ListItem key="Configuracion">
+                <ListItemButton>
+                  <ListItemIcon>
+                    <SettingsIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Configuracion" />
+                </ListItemButton>
+              </ListItem>
+            </NavLink>
+          </List>
+          <Divider />
+        </>
+      ) : (
+        <Divider />
+      )}
 
-      <Divider />
       <List>
         <NavLink
-          to="/invoices"
+          to="/login"
           style={({ isActive }) =>
             isActive
               ? {
@@ -80,53 +177,12 @@ export default function ResponsiveDrawer(props: Props) {
               : { textDecoration: "none" }
           }
         >
-          <ListItem key="Facturas" disablePadding>
+          <ListItem key="Login">
             <ListItemButton>
               <ListItemIcon>
-                <RequestQuoteIcon />
+                <AccountCircleIcon />
               </ListItemIcon>
-              <ListItemText primary="Documento Tributario" />
-            </ListItemButton>
-          </ListItem>
-        </NavLink>
-        <NavLink
-          to="/customers"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  textDecoration: "none",
-                }
-              : { textDecoration: "none" }
-          }
-        >
-          <ListItem key="Clientes" disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <PeopleAltIcon />
-              </ListItemIcon>
-              <ListItemText primary="Clientes" />
-            </ListItemButton>
-          </ListItem>
-        </NavLink>
-      </List>
-      <Divider />
-      <List>
-        <NavLink
-          to="/settings"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  textDecoration: "none",
-                }
-              : { textDecoration: "none" }
-          }
-        >
-          <ListItem key="Configuracion">
-            <ListItemButton>
-              <ListItemIcon>
-                <SettingsIcon />
-              </ListItemIcon>
-              <ListItemText primary="Configuracion" />
+              <ListItemText primary={loginText} onClick={logout} />
             </ListItemButton>
           </ListItem>
         </NavLink>
@@ -192,13 +248,58 @@ export default function ResponsiveDrawer(props: Props) {
         <Toolbar />
 
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route index element={<Home />} />
-          <Route path="/invoices" element={<Invoice />} />
-          <Route path="/customers" element={<Customer />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/CreateInvoice" element={<CreateInvoice />} />
-          <Route path="/invoiceView/:id" element={<InvoiceViewPrint />} />
+          <Route
+            path="/home"
+            element={
+              <ProtectedRoute user={user}>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route index element={<Login login={login} />} />
+
+          <Route path="/login" element={<SignInSide login={login} />} />
+          <Route
+            path="/invoices"
+            element={
+              <ProtectedRoute user={user}>
+                <Invoice />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/customers"
+            element={
+              <ProtectedRoute user={user}>
+                <Customer />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <ProtectedRoute user={user}>
+                <Settings />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/CreateInvoice"
+            element={
+              <ProtectedRoute user={user}>
+                <CreateInvoice />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/invoiceView/:id"
+            element={
+              <ProtectedRoute user={user}>
+                <InvoiceViewPrint />
+              </ProtectedRoute>
+            }
+          />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </Box>

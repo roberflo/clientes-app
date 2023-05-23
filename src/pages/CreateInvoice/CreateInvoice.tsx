@@ -479,6 +479,7 @@ const CreateInvoice = () => {
               placeholder="Gracias por hacer negocios con nosotros"
               multiline
               onChange={(event) => setInvoiceDescription(event.target.value)}
+              style={{ display: "none" }}
             />
           </Grid>
           <Grid xs={12} md={6} sx={{ mt: 1, mb: 1 }}>
